@@ -23,12 +23,14 @@ exports.rule = entities.Issue.onChange({
     var lastPRAuthor = lastPR.user;
 
     // Checking if PR is Declined and Issue is now under Review. If so, set Issue to "In Progress" state
-    if (
-      lastPR.state.name === 'DECLINED' &&
-      issueStatus === ctx.State.Review.name
-    ) {
-      issue.fields.State = ctx.State.InProgress;
+    var continueCondition =
+      lastPR.state.name === 'DECLINED' && issueStatus === ctx.State.Review.name;
+
+    if (!continueCondition) {
+      return;
     }
+
+    issue.fields.State = ctx.State.InProgress;
 
     var projectUsers = issue.project.team.users;
     var lastPRAuthorInYT = lastPRAuthor
