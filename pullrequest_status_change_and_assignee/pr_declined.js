@@ -29,7 +29,8 @@ exports.rule = entities.Issue.onChange({
       issue.fields.State = ctx.State.InProgress;
     }
 
-    var allUsers = ctx.allUsersGroup.users;
+    // var allUsers = ctx.allUsersGroup.users;
+    var projectUsers = issue.project.team.users;
     var lastPRAuthorInYT = lastPRAuthor
       ? allUsers.find(function (YTuser) {
           return YTuser.login === lastPRAuthor.login;
