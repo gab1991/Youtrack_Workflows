@@ -7,7 +7,7 @@ exports.rule = entities.Issue.onChange({
     return (
       ctx.issue.fields.State.name === ctx.State.Review.name &&
       ctx.issue.pullRequests.isNotEmpty() && // ensure there is PRs
-      //!ctx.issue.fields.isChanged(ctx.State) && // allow users to change State manually, otherwise this will be blocked
+      !ctx.issue.fields.isChanged(ctx.State) && // allow users to change State manually, otherwise this will be blocked
       ctx.issue.pullRequests.last().previousState &&
       ctx.issue.pullRequests.last().state.name !==
         ctx.issue.pullRequests.last().previousState.name
@@ -32,29 +32,21 @@ exports.rule = entities.Issue.onChange({
     // var allUsers = ctx.allUsersGroup.users;
     var projectUsers = issue.project.team.users;
     var lastPRAuthorInYT = lastPRAuthor
-      ? allUsers.find(function (YTuser) {
+      ? projectUsers.find(function (YTuser) {
           return YTuser.login === lastPRAuthor.login;
         })
       : null;
 
-    console.log(lastPRAuthorInYT);
-
-    // if lastPRAuthorInYT is the author of PR then assign to him. Otherwise to Unassign
-    console.log(issue.fields.Assignee);
-    // console.log(issue.fields.Assignee);
+    // Remove rewier from the issue
     issue.fields.Assignee.clear();
+
+    // if lastPRAuthorInYT is the author of PR then assign to him. Otherwise leave unassign
     if (lastPRAuthorInYT) {
-      console.log('here');
       issue.fields.Assignee.add(lastPRAuthorInYT);
     }
   },
 
   requirements: {
-    // Getting all availbale users
-    allUsersGroup: {
-      type: entities.UserGroup,
-      name: 'All Users',
-    },
     // Has to match states from current project
     State: {
       type: entities.State.fieldType,
