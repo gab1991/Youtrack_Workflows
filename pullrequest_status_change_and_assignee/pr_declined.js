@@ -5,6 +5,7 @@ exports.rule = entities.Issue.onChange({
 
   guard: function (ctx) {
     return (
+      ctx.issue.fields.State && // fixing issue.Draft error
       ctx.issue.fields.State.name === ctx.State.Review.name &&
       ctx.issue.pullRequests.isNotEmpty() && // ensure there is PRs
       !ctx.issue.fields.isChanged(ctx.State) && // allow users to change State manually, otherwise this will be blocked
