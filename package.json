@@ -1,0 +1,19 @@
+{
+  "name": "youtrack_workflows",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "list-prod": "cross-env youtrack-workflow list --host=%npm_config_host_prod% --token=%npm_config_token_prod%",
+    "download-prod": "cross-env youtrack-workflow download --host=%npm_config_host_prod% --token=%npm_config_token_prod%",
+    "upload-prod": "cross-env youtrack-workflow upload --host=%npm_config_host_prod% --token=%npm_config_token_prod%"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@jetbrains/youtrack-scripting": "0.0.24",
+    "@jetbrains/youtrack-scripting-api": "^2019.3.68795",
+    "cross-env": "^7.0.2"
+  }
+}
