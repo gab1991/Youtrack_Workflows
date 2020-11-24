@@ -1,0 +1,12 @@
+{
+  "name" : "pullrequest_declined",
+  "title" : "Pullrequest Declined",
+  "description" : null,
+  "dependencies" : {
+    "@jetbrains/youtrack-scripting-api" : "^2020.4.6808"
+  },
+  "youtrack" : {
+    "autoAttached" : false,
+    "readOnly" : false
+  }
+}
