@@ -1,4 +1,5 @@
 var entities = require('@jetbrains/youtrack-scripting-api/entities');
+var workflow = require('@jetbrains/youtrack-scripting-api/workflow');
 
 exports.rule = entities.Issue.onChange({
   title: 'Pr_declined',
@@ -8,7 +9,6 @@ exports.rule = entities.Issue.onChange({
       ctx.issue.fields.State && // fixing issue.Draft error
       ctx.issue.fields.State.name === ctx.State.Review.name &&
       ctx.issue.pullRequests.isNotEmpty() && // ensure there is PRs
-      !ctx.issue.fields.isChanged(ctx.State) && // allow users to change State manually, otherwise this will be blocked
       ctx.issue.pullRequests.last().previousState &&
       ctx.issue.pullRequests.last().state.name !==
         ctx.issue.pullRequests.last().previousState.name
@@ -29,6 +29,12 @@ exports.rule = entities.Issue.onChange({
     if (!continueCondition) {
       return;
     }
+
+    // will throw an error if user tries to move task with declined pr To Review.
+    workflow.check(
+      !ctx.issue.fields.isChanged(ctx.State),
+      'You cannot move issue with the last PR declined to Review State. You should create a new PR to do so'
+    );
 
     issue.fields.State = ctx.State.InProgress;
 
