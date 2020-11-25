@@ -1,25 +1,35 @@
-/**
- * This is a template for an on-change rule. This rule defines what
- * happens when a change is applied to an issue.
- *
- * For details, read the Quick Start Guide:
- * https://www.jetbrains.com/help/youtrack/incloud/2020.4/Quick-Start-Guide-Workflows-JS.html
- */
-
 var entities = require('@jetbrains/youtrack-scripting-api/entities');
+var workflow = require('@jetbrains/youtrack-scripting-api/workflow');
 
 exports.rule = entities.Issue.onChange({
-  // TODO: give the rule a human-readable title
   title: 'Pr_creatation_issue_to_review',
-  guard: function(ctx) {
-    // TODO specify the conditions for executing the rule
-    return true;
+
+  guard: function (ctx) {
+    return (
+      ctx.issue.fields.State && // fixing issue.Draft error
+      ctx.issue.fields.State.name === ctx.State.InProgress.name &&
+      ctx.issue.pullRequests.isNotEmpty() && // ensure there is PRs
+      ctx.issue.pullRequests.last().previousState === null // ensure that this is a new PR added
+    );
   },
-  action: function(ctx) {
-    var issue = ctx.issue;
-    // TODO: specify what to do when a change is applied to an issue
+
+  action: function (ctx) {
+    // move issue to review
+    ctx.issue.fields.State = ctx.State.Review;
+
+    workflow.message('Your task has been sent ' + ctx.State.Review.name);
   },
+
   requirements: {
-    // TODO: add requirements
-  }
+    // Has to match states from current project
+    State: {
+      type: entities.State.fieldType,
+      Review: {
+        name: 'To Review',
+      },
+      InProgress: {
+        name: 'In Progress',
+      },
+    },
+  },
 });
