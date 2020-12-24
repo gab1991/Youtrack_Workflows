@@ -1,12 +1,12 @@
 {
-  "name" : "pr_creation_issue_to_review",
-  "title" : "Pull Request Creation  -> Issue To Review",
-  "description" : null,
-  "dependencies" : {
-    "@jetbrains/youtrack-scripting-api" : "^2020.4.6808"
-  },
-  "youtrack" : {
-    "autoAttached" : false,
-    "readOnly" : false
-  }
+	"name": "pr_creation_issue_to_review",
+	"title": "Pull Request Creation  -> Issue To Review",
+	"description": null,
+	"dependencies": {
+		"@jetbrains/youtrack-scripting-api": "^2020.6.2397"
+	},
+	"youtrack": {
+		"autoAttached": false,
+		"readOnly": false
+	}
 }
