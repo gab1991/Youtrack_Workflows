@@ -7,7 +7,7 @@ exports.rule = entities.Issue.onChange({
 	guard: function (ctx) {
 		return (
 			ctx.issue.fields.State && // fixing issue.Draft error
-			ctx.issue.fields.State.name === ctx.State.Testting.name &&
+			ctx.issue.fields.State.name === ctx.State.Testing.name &&
 			ctx.issue.fields.Assignee &&
 			// should be unassign in order to not blocking manual assignment
 			ctx.issue.fields.Assignee.isEmpty()
@@ -39,7 +39,7 @@ exports.rule = entities.Issue.onChange({
 		// Has to match states from current project
 		State: {
 			type: entities.EnumField.fieldType,
-			Testting: {
+			Testing: {
 				name: 'Testing',
 			},
 		},
