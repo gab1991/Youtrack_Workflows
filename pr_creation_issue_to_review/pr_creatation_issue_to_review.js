@@ -33,11 +33,11 @@ exports.rule = entities.Issue.onChange({
 			InProgress: {
 				name: 'In Progress',
 			},
-			// In order the script to work we must provide info that this custom type exists
-			Assignee: {
-				type: entities.User.fieldType,
-				multi: true,
-			},
+		},
+		// In order the script to work we must provide info that this custom type exists
+		Assignee: {
+			type: entities.User.fieldType,
+			multi: true,
 		},
 	},
 });
