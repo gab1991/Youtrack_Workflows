@@ -1,0 +1,12 @@
+{
+  "name" : "block_review_without_pr",
+  "title" : "Block Review Without PR",
+  "description" : null,
+  "dependencies" : {
+    "@jetbrains/youtrack-scripting-api" : "^2020.6.2397"
+  },
+  "youtrack" : {
+    "autoAttached" : false,
+    "readOnly" : false
+  }
+}
