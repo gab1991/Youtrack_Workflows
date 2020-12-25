@@ -10,7 +10,8 @@ exports.rule = entities.Issue.onChange({
 			ctx.issue.fields.State.name === ctx.State.Testing.name &&
 			ctx.issue.fields.Assignee &&
 			// should be unassign in order to not blocking manual assignment
-			ctx.issue.fields.Assignee.isEmpty()
+			ctx.issue.fields.Assignee.isEmpty() &&
+			ctx.TestingGroup.users.size
 		);
 	},
 
