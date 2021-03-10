@@ -7,7 +7,8 @@ exports.rule = entities.Issue.onChange({
 	guard: function (ctx) {
 		return (
 			ctx.issue.fields.State && // fixing issue.Draft error
-			ctx.issue.fields.State.name === ctx.State.InProgress.name &&
+			(ctx.issue.fields.State.name === ctx.State.InProgress.name ||
+				ctx.issue.fields.State.name === ctx.State.Planned.name) &&
 			ctx.issue.pullRequests.isNotEmpty() && // ensure there is PRs
 			ctx.issue.pullRequests.last().previousState === null // ensure that this is a new PR added
 		);
@@ -28,9 +29,12 @@ exports.rule = entities.Issue.onChange({
 		State: {
 			type: entities.EnumField.fieldType,
 			Review: {
-				name: 'Reviewing',
+				name: 'Review',
 			},
 			InProgress: {
+				name: 'Open',
+			},
+			Planned: {
 				name: 'In Progress',
 			},
 		},

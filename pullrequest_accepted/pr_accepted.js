@@ -48,7 +48,7 @@ exports.rule = entities.Issue.onChange({
 		State: {
 			type: entities.EnumField.fieldType,
 			Review: {
-				name: 'Reviewing',
+				name: 'Review',
 			},
 			Testing: {
 				name: 'Testing',

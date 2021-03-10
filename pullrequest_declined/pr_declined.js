@@ -62,7 +62,7 @@ exports.rule = entities.Issue.onChange({
 				name: 'In Progress',
 			},
 			Review: {
-				name: 'Reviewing',
+				name: 'Review',
 			},
 		},
 		// In order the script to work we must provide info that this custom type exists

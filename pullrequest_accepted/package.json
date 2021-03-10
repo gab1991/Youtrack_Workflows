@@ -3,7 +3,7 @@
   "title" : "Pullrequest Accepted",
   "description" : null,
   "dependencies" : {
-    "@jetbrains/youtrack-scripting-api" : "^2020.4.6808"
+    "@jetbrains/youtrack-scripting-api" : "^2020.6.2397"
   },
   "youtrack" : {
     "autoAttached" : false,

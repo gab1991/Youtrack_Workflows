@@ -87,7 +87,7 @@ exports.rule = entities.Issue.onChange({
 		State: {
 			type: entities.EnumField.fieldType,
 			Reviewing: {
-				name: 'Reviewing',
+				name: 'Review',
 			},
 		},
 		Assignee: {
@@ -127,7 +127,7 @@ function cleanUsersSetFromPrAuthor(userSet, prAuthorObj) {
 
 	var index = null;
 	for (var i = 0; i < cleanedArrayOfUsers.length; i++) {
-		if (prAuthorObj.login === cleanedArrayOfUsers[i].login) {
+		if (prAuthorObj && prAuthorObj.login === cleanedArrayOfUsers[i].login) {
 			index = i;
 			break;
 		}
