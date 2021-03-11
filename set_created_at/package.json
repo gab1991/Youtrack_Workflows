@@ -1,0 +1,12 @@
+{
+  "name" : "set_created_at",
+  "title" : "Set \"Created at\" at task creation",
+  "description" : null,
+  "dependencies" : {
+    "@jetbrains/youtrack-scripting-api" : "^2020.6.6600"
+  },
+  "youtrack" : {
+    "autoAttached" : false,
+    "readOnly" : false
+  }
+}
