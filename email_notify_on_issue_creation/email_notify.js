@@ -3,7 +3,7 @@ var notifications = require('@jetbrains/youtrack-scripting-api/notifications');
 
 function emailComposer(issue, emails) {
 	var subject = '[Help Desk] New Issue ' + issue.id + ' ' + issue.summary;
-	var body = issue.wikify(issue.description);
+	var body = issue.wikify(issue.description || '');
 	var link = '<a href="' + issue.url + '">' + issue.id + '</a>';
 	var footer =
 		'<div style="        color: #888888; background-color: #f0f0f0; padding-left: 5px; min-height: 50px display: flex; flex-direction: column; justify-content: center;">' +
@@ -47,6 +47,7 @@ exports.rule = entities.Issue.onChange({
 		var message = emailComposer(issue, emails);
 
 		notifications.sendEmail(message, issue);
+		console.log('worked on issue' + issue.id);
 	},
 	requirements: {
 		EmailReceivers: {
