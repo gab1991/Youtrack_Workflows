@@ -1,0 +1,12 @@
+{
+  "name" : "email_notify_on_issue_creation",
+  "title" : "Email notification on issue creation",
+  "description" : null,
+  "dependencies" : {
+    "@jetbrains/youtrack-scripting-api" : "^2020.6.6600"
+  },
+  "youtrack" : {
+    "autoAttached" : false,
+    "readOnly" : false
+  }
+}
