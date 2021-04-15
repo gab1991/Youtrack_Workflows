@@ -1,0 +1,11 @@
+{
+  "name" : "set_task_parent_id",
+  "title" : "Set Task parent_id",
+  "description" : null,
+  "dependencies" : {
+    "@jetbrains/youtrack-scripting-api" : "^2021.1.11513"
+  },
+  "youtrack" : {
+    "autoAttached" : false
+  }
+}
