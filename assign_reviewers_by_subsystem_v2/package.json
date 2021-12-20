@@ -1,0 +1,12 @@
+{
+	"name": "assign_reviewers_by_subsystem_v2",
+	"title": "Assign Reviewers by Subsystem_v2",
+	"description": "",
+	"dependencies": {
+		"@jetbrains/youtrack-scripting-api": "^2020.6.3319"
+	},
+	"youtrack": {
+		"autoAttached": false,
+		"readOnly": false
+	}
+}
