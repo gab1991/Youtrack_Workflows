@@ -13,7 +13,10 @@ exports.rule = entities.Issue.onChange({
 
 	action: function (ctx) {
 		// will throw an error if user tries to move task without PR.
-		workflow.check(ctx.issue.pullRequests.isNotEmpty(), 'You cannot move issue without PR to Review');
+		const lastPr = ctx.issue.pullRequests.last();
+		const hasActivePr = !!lastPr && lastPr.state.name !== 'DECLINED';
+
+		workflow.check(hasActivePr, 'You cannot move issue without PR to Review');
 
 		console.log('Wokred on issue ', ctx.issue.id);
 	},
@@ -24,9 +27,6 @@ exports.rule = entities.Issue.onChange({
 			type: entities.EnumField.fieldType,
 			Review: {
 				name: 'Review',
-			},
-			InProgress: {
-				name: 'In Progress',
 			},
 		},
 	},
