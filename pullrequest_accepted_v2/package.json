@@ -1,0 +1,12 @@
+{
+	"name": "pullrequest_accepted_v2",
+	"title": "Pullrequest Accepted_v2",
+	"description": "",
+	"dependencies": {
+		"@jetbrains/youtrack-scripting-api": "^2020.6.2397"
+	},
+	"youtrack": {
+		"autoAttached": false,
+		"readOnly": false
+	}
+}
