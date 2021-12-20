@@ -1,0 +1,12 @@
+{
+	"name": "testing_group_auto_assign_v2",
+	"title": "Testing Group Auto Assign-v2",
+	"description": "",
+	"dependencies": {
+		"@jetbrains/youtrack-scripting-api": "^2020.6.2397"
+	},
+	"youtrack": {
+		"autoAttached": false,
+		"readOnly": false
+	}
+}
