@@ -1,0 +1,12 @@
+{
+	"name": "pullrequest_status_change_and_assignee_v2",
+	"title": "Pullrequest Status Change and Assignee_v2",
+	"description": "",
+	"dependencies": {
+		"@jetbrains/youtrack-scripting-api": "^2020.4.6808"
+	},
+	"youtrack": {
+		"autoAttached": false,
+		"readOnly": false
+	}
+}
