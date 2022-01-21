@@ -34,7 +34,7 @@ exports.rule = entities.Issue.onChange({
 		);
 
 		//Move to testing
-		issue.fields.State = ctx.State.Testing;
+		issue.fields.State = ctx.State.TestReady;
 
 		console.log('pr_accepted', issue.id);
 	},
@@ -47,8 +47,8 @@ exports.rule = entities.Issue.onChange({
 			Review: {
 				name: 'Review',
 			},
-			Testing: {
-				name: 'Testing',
+			TestReady: {
+				name: 'Test Ready',
 			},
 		},
 	},
