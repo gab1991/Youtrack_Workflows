@@ -12,6 +12,13 @@ exports.rule = entities.Issue.onChange({
 	},
 
 	action: function (ctx) {
+		const prevState = ctx.issue.fields.oldValue('State');
+
+		if (prevState.name === ctx.State.Reopen.name) {
+			// do nothing if comes from repoen
+			return;
+		}
+
 		// will throw an error if user tries to move task without PR.
 		const lastPr = ctx.issue.pullRequests.last();
 		const hasActivePr = !!lastPr && lastPr.state.name !== 'DECLINED';
@@ -27,6 +34,12 @@ exports.rule = entities.Issue.onChange({
 			type: entities.EnumField.fieldType,
 			Review: {
 				name: 'Review',
+			},
+			TestReady: {
+				name: 'Test Ready',
+			},
+			Reopen: {
+				name: 'Reopen',
 			},
 		},
 	},
