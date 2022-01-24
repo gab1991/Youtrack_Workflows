@@ -21,7 +21,7 @@ exports.rule = entities.Issue.onChange({
 		var lastPR = issue.pullRequests.last();
 		var lastPRAuthor = lastPR.user;
 
-		// Checking if PR is Declined and Issue is now under Review. If so, set Issue to "In Progress" state
+		// Checking if PR is Declined and Issue is now under Review. If so, set Issue to "Reopen" state
 		var continueCondition = lastPR.state.name === 'DECLINED' && issueStatus === ctx.State.Review.name;
 
 		if (!continueCondition) {
@@ -34,7 +34,7 @@ exports.rule = entities.Issue.onChange({
 			'You cannot move issue with the last PR declined to Review State. You should create a new PR to do so',
 		);
 
-		issue.fields.State = ctx.State.InProgress;
+		issue.fields.State = ctx.State.Reopen;
 
 		var projectUsers = issue.project.team.users;
 		var lastPRAuthorInYT = lastPRAuthor
@@ -44,29 +44,27 @@ exports.rule = entities.Issue.onChange({
 			: null;
 
 		// Remove rewier from the issue
-		issue.fields.Assignee.clear();
+		issue.fields.Developer.clear();
 
 		// if lastPRAuthorInYT is the author of PR then assign to him. Otherwise leave unassign
 		if (lastPRAuthorInYT) {
-			issue.fields.Assignee.add(lastPRAuthorInYT);
+			issue.fields.Developer.add(lastPRAuthorInYT);
 		}
-
-		console.log('pr_declined', issue.id);
 	},
 
 	requirements: {
 		// Has to match states from current project
 		State: {
 			type: entities.EnumField.fieldType,
-			InProgress: {
-				name: 'In Progress',
+			Reopen: {
+				name: 'Reopen',
 			},
 			Review: {
 				name: 'Review',
 			},
 		},
 		// In order the script to work we must provide info that this custom type exists
-		Assignee: {
+		Developer: {
 			type: entities.User.fieldType,
 			multi: true,
 		},

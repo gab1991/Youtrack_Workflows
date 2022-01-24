@@ -14,7 +14,7 @@ exports.rule = entities.Issue.onChange({
 	action: function (ctx) {
 		const prevState = ctx.issue.fields.oldValue('State');
 
-		if (prevState.name === ctx.State.Reopen.name) {
+		if (prevState && prevState.name && prevState.name === ctx.State.Reopen.name) {
 			// do nothing if comes from repoen
 			return;
 		}
